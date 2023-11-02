@@ -1,0 +1,21 @@
+<%= simple_form_for quote, html: { class: "quote form" } do |f| %>
+  
+  <%# if quote.errors.any? %>
+    <!-- <div class="error-message"> -->
+      <%#= quote.errors.full_messages.to_sentence.capitalize %>
+    <!-- </div> -->
+  <%# end %>
+  <!-- We've created an helper at helpers/application_helper.rb
+       to use for errors notifications because 
+       we have now two forms that might report errors
+       one for quotes views and one for line_item_dates view [DRY]
+    -->
+  <%= form_error_notification(quote) %>
+
+  <%= f.input :name, input_html: { autofocus: true } %>
+  <%= link_to "Cancel", 
+              quotes_path, 
+              class: "btn btn--light", 
+              data: { turbo_frame: "_top" } %>
+  <%= f.submit class: "btn btn--secondary" %>
+<% end %>

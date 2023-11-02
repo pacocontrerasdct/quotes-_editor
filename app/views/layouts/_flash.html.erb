@@ -1,0 +1,8 @@
+<% flash.each do |flash_type, message| %>
+	<div class="flash__message"
+			 data-controller="removals"
+			 data-action="animationend->removals#remove">  <!-- This data controller and action 
+			 																										are from stimulus -> javascript function remove()-->
+		<%= message %>
+	</div>
+<% end %>

@@ -1,0 +1,18 @@
+
+<%= turbo_stream.remove @quote %>
+
+<!-- Tells Turbo to prepend 'flash' messages [app/helpers/application_helper] -->
+<%= render_turbo_stream_flash_messages %>
+
+<%#
+		We were using the below block to show empty_state if there were no quotes available,
+		but turbo_stream has a flaw, and it's that if current_user is subscribed to a broadcast
+		another user could push a quote, and the interface would show both 
+		the broadcasted quote and the empty_state form.
+		To improve the behavior, we are using the only-child CSS pseudo-class
+%>
+<%# unless current_company.quotes.exists? %>
+	<%#= turbo_stream.update Quote.new do %>
+		<%#= render "quotes/empty_state" %>
+	<%# end %>
+<%# end %>

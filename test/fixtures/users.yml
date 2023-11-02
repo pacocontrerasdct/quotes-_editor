@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# NOTE:
+# Devise stores the encrypted_password field in the users database table for security reasons. 
+# If we want our fixtures to have the string "password" as a password, 
+# we need to use the same method the Devise gem would use 
+# to encrypt the password in our fixtures. 
+# This is why we use the Devise::Encryptor.digest method here
+
+accountant:
+  company: kpmg
+  email: accountant@kpmg.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+manager:
+  company: kpmg
+  email: manager@kpmg.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+eavesdropper:
+  company: pwc
+  email: eavesdropper@pwc.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>

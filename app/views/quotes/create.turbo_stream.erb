@@ -1,0 +1,29 @@
+
+<!-- Tells Turbo to prepend to the Turbo Frame 
+		 with id "quotes" the _quote.html.erb partial -->
+
+
+<!-- These are three equivalent ways of writing our view: -->
+
+<!-- normal -->
+<%#= turbo_stream.prepend "quotes", partial: "quotes/quote", locals: { quote: @quote } %>
+
+<!-- Block way -->
+<%#= turbo_stream.prepend "quotes" do %>
+	<%#= render partial: "quotes/quote", locals: { quote: @quote } %> 
+<%# end %>
+
+<!-- simplified BLOCK way [ 'render partial: "quotes/quote"...' is equal to 'render @quote' ] -->
+<%#= turbo_stream.prepend "quotes" do %>
+	<%#= render @quote %>
+<%# end %>
+
+<!-- simplified one-line way [ 'render partial: "quotes/quote"...' is equal to 'render @quote' ] -->
+<%= turbo_stream.prepend "quotes", @quote %>
+
+<!-- Tells Turbo to update the Turbo Frame 
+		 with id new_quote with empty content -->
+<%= turbo_stream.update Quote.new, "" %>
+
+<!-- Tells Turbo to prepend 'flash' messages [app/helpers/application_helper] -->
+<%= render_turbo_stream_flash_messages %>

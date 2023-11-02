@@ -1,0 +1,60 @@
+
+<%= turbo_frame_tag line_item_date do %>
+	<div class="line-item-date">
+		
+		<%= turbo_frame_tag nested_dom_id("edit", line_item_date) do %>	
+			<div class="line-item-date__header">
+				<h2 class="line-item-date__title">
+					<%= l(line_item_date.date, format: :long) %>
+				</h2>
+				<div class="line-item-date__actions">
+
+					<!-- This is a valid route definition with its params
+							and it's equivalent to the polymorphic route below -->
+					<%#= button_to "Delete", quote_line_item_date_path(quote, line_item_date) %>
+
+					<!-- but use polymorphic routes here for readability purposes -->
+					<%= button_to "Delete",
+												quote_line_item_date_path(quote, line_item_date),
+												method: :delete,
+												form: { data: { turbo_confirm: "Are you sure?" } },
+												class: "btn btn--light" %>
+
+
+					<%= link_to "Edit",
+											[:edit, quote, line_item_date],
+											class: "btn btn--light" %>
+				</div>
+			</div>
+		<% end %>
+
+		<div class="line-item-date__body">
+			<div class="line-item line-item--header">
+				<div class="line-item__name">Article</div>
+				<div class="line-item__quantity">Quantity</div>
+				<div class="line-item__price">Price</div>
+				<div class="line-item__actions"></div>
+			</div>
+
+			<%= turbo_frame_tag nested_dom_id(line_item_date, "line_items") do %>
+				<%= render line_item_date.line_items, quote: quote, line_item_date: line_item_date %>
+			<% end %>
+
+			<!--  We have created an application helper method to help
+						generating and reading nested resources,
+						so instead of using this complex dom_id construt
+						we just pass as many args as we want to generate the resource link -->
+			<%#= turbo_frame_tag dom_id(LineItem.new, dom_id(line_item_date)) %>
+			<%=  turbo_frame_tag nested_dom_id(line_item_date, LineItem.new) %>
+			
+			<div class="line-item-date__footer">
+				<%= link_to "Add item",
+										[:new, quote, line_item_date, :line_item],
+										class: "btn btn--primary",
+										data: { turbo_frame: nested_dom_id(line_item_date, LineItem.new) } %>
+			</div>
+
+		</div>
+
+	</div>
+<% end %>

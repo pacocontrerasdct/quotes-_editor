@@ -24,8 +24,6 @@ class QuotesController < ApplicationController
 		end
 	end
 
-
-
 	def show
 		@line_item_dates = @quote.line_item_dates.includes(:line_items).i_decide_order
 	end
@@ -51,7 +49,6 @@ class QuotesController < ApplicationController
 			format.turbo_stream { flash.now[:notice] = "Quote was successfully deleted!"}
 		end
 	end
-
 
 
 	private

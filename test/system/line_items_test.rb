@@ -33,6 +33,7 @@ class LineItemsTest < ApplicationSystemTestCase
 		assert_selector "h1", text: "First quote"
 		assert_text "my new item"
 		assert_text "Item successfully created!"
+		assert_text number_to_currency(@quote.total_price)
 	end
 
 	test "Updating a line item" do 
@@ -50,6 +51,7 @@ class LineItemsTest < ApplicationSystemTestCase
 		click_on "Update"
 		assert_selector "h1", text: "First quote"
 		assert_text "Item successfully updated!"
+		assert_text number_to_currency(@quote.total_price)
 		assert_text "Meeting room updated"
 		assert_text number_to_currency(1234)
 	end
@@ -71,6 +73,7 @@ class LineItemsTest < ApplicationSystemTestCase
 
     assert_selector "h1", text: "First quote"
     assert_text "Item successfully deleted!"
+    assert_text number_to_currency(@quote.total_price)
   end
 
 end

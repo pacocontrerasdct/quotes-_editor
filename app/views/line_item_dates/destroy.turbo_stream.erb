@@ -1,5 +1,9 @@
 
 <%= turbo_stream.remove @line_item_date %>
 
+<%= turbo_stream.update dom_id(@quote, :total) do %>
+  <%= render "quotes/total", quote: @quote %>
+<% end %>
+
 <!-- Tells Turbo to prepend 'flash' messages [app/helpers/application_helper] -->
 <%= render_turbo_stream_flash_messages %>
